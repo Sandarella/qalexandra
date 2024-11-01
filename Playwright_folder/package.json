@@ -1,7 +1,7 @@
 {
   "name": "alexandra-reshetnikova-s-portfolio",
   "version": "1.0.0",
-  "description": "Измени потом описание и тут еще",
+  "description": "Configuration files for my portfolio of automated tests on JS+Playwright\Cypress",
   "main": "index.js",
   "directories": {
     "test": "tests"
