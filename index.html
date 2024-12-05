@@ -462,6 +462,33 @@
          <footer class="footer text-center py-4">
          </footer>
       </div>
-      <script src="assets/js/bootstrap.min.js"></script>       
+      <script src="assets/js/bootstrap.min.js"></script> 
+      <script class="skills-section py-3" 
+      src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js">
+      </script>
+      <script class="skills-section py-3" 
+      src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js">
+      </script>
+         <button id="downloadPDF" 
+       style="position: fixed; top: 10px; right: 10px; padding: 10px 20px; background-color: #5D6BA7; color:#fff; border: none; border-radius: 5px; cursor: pointer;">
+       Скачать PDF
+      </button>
+      <script>
+         document.getElementById('downloadPDF').addEventListener('click', async () => {
+             const { jsPDF } = window.jspdf;
+     
+             // Создаем canvas из всей страницы
+             const canvas = await html2canvas(document.body, { scale: 2 });
+             const imgData = canvas.toDataURL('image/png');
+     
+             // Создаем PDF
+             const pdf = new jsPDF('p', 'mm', 'a4');
+             const pdfWidth = pdf.internal.pageSize.getWidth();
+             const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+     
+             pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+             pdf.save('QA_Sandra.pdf');
+         });
+     </script>
    </body>
 </html>
