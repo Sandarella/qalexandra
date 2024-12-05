@@ -475,20 +475,36 @@
       </button>
       <script>
          document.getElementById('downloadPDF').addEventListener('click', async () => {
-             const { jsPDF } = window.jspdf;
-     
-             // Создаем canvas из всей страницы
-             const canvas = await html2canvas(document.body, { scale: 2 });
-             const imgData = canvas.toDataURL('image/png');
-     
-             // Создаем PDF
-             const pdf = new jsPDF('p', 'mm', 'a4');
-             const pdfWidth = pdf.internal.pageSize.getWidth();
-             const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-     
-             pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-             pdf.save('QA_Sandra.pdf');
-         });
+    const { jsPDF } = window.jspdf;
+
+    // Настройки для PDF
+    const pdf = new jsPDF('p', 'mm', 'a4'); // A4 формат
+    const pdfWidth = pdf.internal.pageSize.getWidth(); // Ширина страницы PDF
+    const pdfHeight = pdf.internal.pageSize.getHeight(); // Высота страницы PDF
+
+    // Рендерим всю страницу в canvas
+    const canvas = await html2canvas(document.body, {
+        scale: 1, // Масштабируем рендеринг
+    });
+
+    // Получаем изображение с canvas
+    const imgData = canvas.toDataURL('image/png');
+
+    // Пропорции изображения
+    const imgWidth = pdfWidth; // Задаем ширину как ширину страницы
+    const imgHeight = (canvas.height * imgWidth) / canvas.width; // Высота с учетом пропорций
+
+    // Масштабируем изображение, чтобы оно уместилось на одной странице
+    const scaleFactor = Math.min(pdfWidth / canvas.width, pdfHeight / canvas.height);
+    const scaledWidth = canvas.width * scaleFactor;
+    const scaledHeight = canvas.height * scaleFactor;
+
+    // Добавляем изображение на страницу PDF
+    pdf.addImage(imgData, 'PNG', (pdfWidth - scaledWidth) / 2, (pdfHeight - scaledHeight) / 2, scaledWidth, scaledHeight);
+
+    // Сохраняем PDF
+    pdf.save('MyUpdatedResume.pdf');
+});
      </script>
    </body>
 </html>
