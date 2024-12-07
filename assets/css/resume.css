@@ -71,3 +71,19 @@ margin-bottom: 45px;
     
   }
 }
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+.button {
+  padding: 10px 20px;
+  background-color: #5D6BA7; 
+  color:#fff; 
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+}
