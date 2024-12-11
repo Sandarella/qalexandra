@@ -63,6 +63,9 @@ margin-bottom: 45px;
  padding-left: 25px;
 }
 
+.list-unstyled li .svg-inline--fa {
+  margin-left: -16px;
+}
 
 
 .mr-3 {
