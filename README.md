@@ -3,7 +3,7 @@
 
 ## project-root/ логическая структура репозитория  
 `│`  
-`├__Cypress/__`  
+`├`**Cypress/**     
 `│`  
 `├── tests/`  
 `│   ├── ui/                   # UI-тесты`  
@@ -26,7 +26,7 @@
 `│   ├── products.json         # JSON-файл с товарами`  
 `│   └── ...                   # Другие тестовые данные`  
 `│`  
-`├**Playwright/**`  
+`├`**Playwright/**  
 `│`  
 `├── tests/`  
 `│   ├── ui/                   # UI-тесты`  
@@ -49,12 +49,12 @@
 `│   ├── products.json         # JSON-файл с товарами`  
 `│   └── ...                   # Другие тестовые данные`  
 `│`   
-`├**Config/**                     # Конфигурации`  
+`├`**Config/**`                     # Конфигурации`  
 `│   ├── cypress.config.js     # Конфиг для Cypress`  
 `│   ├── playwright.config.js  # Конфиг для Playwright`  
 `│   └── jenkinsfile           # Jenkins pipeline файл`  
 `│`  
-`│**Image/**                      # Изображения`  
+`│`**Image/**`                      # Изображения`  
 `│`  
-`├**README.md**                   # Описание проекта`  
+`├`**README.md**`                   # Описание проекта`  
 `│`  
