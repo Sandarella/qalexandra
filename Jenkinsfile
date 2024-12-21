@@ -27,8 +27,8 @@ pipeline {
                 script {
                     // Шаг деплоя в указанную папку на компьютере
 					echo 'Deploying to /path...'
-                   // sh 'mkdir -p /Users/alexandrareshetnikova/Проекты/Portfolio/buildpath' 
-                    sh 'cp -r target/* /Users/alexandrareshetnikova/Проекты/Portfolio/buildpath'
+                   // sh 'mkdir -p /Users/alexandrareshetnikova/Проекты/Build'
+                    sh 'cp -r target/* /Users/alexandrareshetnikova/Проекты/Build'
                 }
             }
         }
