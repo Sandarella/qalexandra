@@ -531,21 +531,30 @@
     const pdfWidth = pdf.internal.pageSize.getWidth(); // Ширина страницы A4
     const pdfHeight = pdf.internal.pageSize.getHeight(); // Высота страницы A4
 
+    // Устанавливаем желаемую высоту изображения, немного больше стандартной высоты A4
+    const customHeight = pdfHeight + 30; // Высота, которая чуть больше стандартной A4 (например, 30 мм)
+
     // Рендерим всю страницу в canvas
     const canvas = await html2canvas(document.body, {
         scale: 2, // Высокий масштаб для увеличения качества изображения
-        logging: false, // Отключение логирования, если оно не нужно
+        logging: false, // Отключаем логирование, если оно не нужно
     });
 
     // Получаем изображение из canvas
     const imgData = canvas.toDataURL('image/png');
 
     // Масштабируем изображение, чтобы оно заполнило всю ширину страницы A4
-    const imgWidth = pdfWidth; // Ширина будет равна ширине страницы A4
+    const imgWidth = pdfWidth; // Ширина изображения равна ширине страницы A4
     const imgHeight = (canvas.height * imgWidth) / canvas.width; // Пропорциональная высота с учетом новой ширины
 
+    // Если высота изображения меньше желаемой, увеличиваем её
+    if (imgHeight < customHeight) {
+        const scaleFactor = customHeight / imgHeight; // Масштабируем по высоте
+        imgHeight = imgHeight * scaleFactor;
+    }
+
     // Добавляем изображение на страницу PDF
-    pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight); // Начинаем с 0,0 для заполения всей страницы
+    pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight); // Начинаем с 0,0 для заполниния всей страницы
 
     // Сохраняем PDF
     pdf.save('QA_Sandra.pdf');
