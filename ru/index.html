@@ -540,17 +540,12 @@
     // Получаем изображение из canvas
     const imgData = canvas.toDataURL('image/png');
 
-    // Пропорции изображения, чтобы оно занимало всю ширину страницы A4
-    const imgWidth = pdfWidth; // Задаем ширину как ширину страницы
-    const imgHeight = (canvas.height * imgWidth) / canvas.width; // Высота с учетом пропорций
-
-    // Масштабируем изображение, чтобы оно уместилось на одной странице
-    const scaleFactor = Math.min(pdfWidth / canvas.width, pdfHeight / canvas.height);
-    const scaledWidth = canvas.width * scaleFactor;
-    const scaledHeight = canvas.height * scaleFactor;
+    // Масштабируем изображение, чтобы оно заполнило всю ширину страницы A4
+    const imgWidth = pdfWidth; // Ширина будет равна ширине страницы A4
+    const imgHeight = (canvas.height * imgWidth) / canvas.width; // Пропорциональная высота с учетом новой ширины
 
     // Добавляем изображение на страницу PDF
-    pdf.addImage(imgData, 'PNG', (pdfWidth - scaledWidth) / 2, (pdfHeight - scaledHeight) / 2, scaledWidth, scaledHeight);
+    pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight); // Начинаем с 0,0 для заполения всей страницы
 
     // Сохраняем PDF
     pdf.save('QA_Sandra.pdf');
