@@ -522,39 +522,45 @@
       <script class="skills-section py-3" 
       src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js">
       </script>
-         
-      <script>
-         document.getElementById('downloadPDF').addEventListener('click', async () => {
-    const { jsPDF } = window.jspdf;
-
-    // Настройки для PDF
-    const pdf = new jsPDF('p', 'mm', 'a4'); // A4 формат
-    const pdfWidth = pdf.internal.pageSize.getWidth(); // Ширина страницы PDF
-    const pdfHeight = pdf.internal.pageSize.getHeight(); // Высота страницы PDF
-
-    // Рендерим всю страницу в canvas
-    const canvas = await html2canvas(document.body, {
-        scale: 1, // Масштабируем рендеринг
-    });
-
-    // Получаем изображение с canvas
-    const imgData = canvas.toDataURL('image/png');
-
-    // Пропорции изображения
-    const imgWidth = pdfWidth; // Задаем ширину как ширину страницы
-    const imgHeight = (canvas.height * imgWidth) / canvas.width; // Высота с учетом пропорций
-
-    // Масштабируем изображение, чтобы оно уместилось на одной странице
-    const scaleFactor = Math.min(pdfWidth / canvas.width, pdfHeight / canvas.height);
-    const scaledWidth = canvas.width * scaleFactor;
-    const scaledHeight = canvas.height * scaleFactor;
-
-    // Добавляем изображение на страницу PDF
-    pdf.addImage(imgData, 'PNG', (pdfWidth - scaledWidth) / 2, (pdfHeight - scaledHeight) / 2, scaledWidth, scaledHeight);
-
-    // Сохраняем PDF
-    pdf.save('QA_Sandra.pdf');
-});
-     </script>
+         <script>
+            document.getElementById('downloadPDF').addEventListener('click', async () => {
+                const { jsPDF } = window.jspdf;
+        
+                // Настройки для PDF: используем ориентацию 'l' для широкой страницы
+                const pdf = new jsPDF('l', 'mm', 'a4'); // A4 формат, landscape
+                const pdfWidth = pdf.internal.pageSize.getWidth(); // Ширина страницы PDF
+                const pdfHeight = pdf.internal.pageSize.getHeight(); // Высота страницы PDF
+        
+                // Рендерим всю страницу в canvas с увеличенным масштабом
+                const canvas = await html2canvas(document.body, {
+                    scale: 2, // Увеличиваем масштаб для улучшения качества
+                });
+        
+                // Получаем изображение с canvas
+                const imgData = canvas.toDataURL('image/png');
+        
+                // Пропорции изображения
+                const imgWidth = pdfWidth; // Задаем ширину как ширину страницы
+                const imgHeight = (canvas.height * imgWidth) / canvas.width; // Высота с учетом пропорций
+        
+                // Масштабируем изображение, чтобы оно уместилось на одной странице
+                const scaleFactor = Math.min(pdfWidth / canvas.width, pdfHeight / canvas.height);
+                const scaledWidth = canvas.width * scaleFactor;
+                const scaledHeight = canvas.height * scaleFactor;
+        
+                // Проверяем, не выходит ли изображение за пределы страницы
+                if (scaledWidth > pdfWidth || scaledHeight > pdfHeight) {
+                    // Если выходит, уменьшаем масштаб изображения
+                    const reduceScale = Math.min(pdfWidth / canvas.width, pdfHeight / canvas.height);
+                    pdf.addImage(imgData, 'PNG', 0, 0, canvas.width * reduceScale, canvas.height * reduceScale);
+                } else {
+                    // Добавляем изображение на страницу PDF
+                    pdf.addImage(imgData, 'PNG', (pdfWidth - scaledWidth) / 2, (pdfHeight - scaledHeight) / 2, scaledWidth, scaledHeight);
+                }
+        
+                // Сохраняем PDF
+                pdf.save('QA_Sandra.pdf');
+            });
+        </script>        
    </body>
 </html>
