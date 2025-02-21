@@ -2,7 +2,7 @@
 node_modules/
 
 # Playwright reports and cache
-playwright/test-results/
+test-results/
 playwright/playwright-report/
 playwright/blob-report/
 playwright/.cache/
