@@ -1,12 +1,14 @@
 {
-  "name": "alexandra-reshetnikova-s-portfolio",
+  "name": "qalexandra",
   "version": "1.0.0",
-  "description": "Configuration files for my portfolio of automated tests on JS+Playwright\Cypress",
+  "description": "Configuration files for my portfolio of automated tests on JS+Playwright|Cypress",
   "main": "index.js",
   "directories": {
     "test": "tests"
   },
-  "scripts": {},
+  "scripts": {
+    "test": "npx playwright test"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

@@ -1,0 +1,19 @@
+# Node modules
+node_modules/
+
+# Playwright reports and cache
+playwright/test-results/
+playwright/playwright-report/
+playwright/blob-report/
+playwright/.cache/
+playwright/test-results/.last-run.json
+
+# Cypress reports and cache (если вы используете Cypress)
+cypress/reports/
+cypress/screenshots/
+cypress/videos/
+cypress/.cache/
+
+# Other common ignores
+.DS_Store
+.env
