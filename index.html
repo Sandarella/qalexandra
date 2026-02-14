@@ -29,5 +29,38 @@
 </head>
 <body>
     <p>Redirecting...</p>
+
+<!-- <button class="button" onclick="downloadPDF()">
+  Download PDF
+</button>  // кнопка
+
+<div id="resume"> </div>  // Обернуть тело для пдф
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script> // скачивание
+
+<script> // скрипт сформировать страницу
+function downloadPDF() {
+ const element = document.getElementById('resume');
+
+  const options = {
+    margin: 0,
+    filename: 'qalexandra_en.pdf',
+    image: { type: 'jpeg', quality: 1 },
+    html2canvas: {
+      scale: 2,
+      useCORS: true,
+      scrollY: 0
+    },
+    jsPDF: {
+      unit: 'px',
+      format: [1600, 3500],
+      orientation: 'portrait'
+    },
+    pagebreak: { mode: ['avoid-all'] }
+  };
+
+  html2pdf().set(options).from(element).save();
+}
+</script> -->
 </body>
 </html>
